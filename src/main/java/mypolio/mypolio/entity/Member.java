@@ -6,7 +6,6 @@ import lombok.Setter;
 import lombok.ToString;
 import mypolio.mypolio.config.UserRole;
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -20,24 +19,25 @@ import java.util.Date;
 public class Member {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int user_seq;
 
-    @Column
+    @Column(length = 30, nullable = false)
     private String name;
 
-    @Column
+    @Column(length = 30, nullable = false)
     private String email;
 
-    @Column
+    @Column(length = 100, nullable = false)
     private String pwd;
 
     @Column(name = "role")
     @Enumerated(EnumType.STRING)
     private UserRole role = UserRole.ROLE_ADMIN;
 
-    @OneToOne(cascade = CascadeType.ALL)
+
     @JoinColumn(name = "salt")
+    @OneToOne(cascade = CascadeType.ALL)
     private Salt salt;
 
 
@@ -45,7 +45,7 @@ public class Member {
     @CreationTimestamp
     private Date signTime;
 
-   //@Override
+    //@Override
    //public String toString() {
    //    return "User{" +
    //            "seq=" + user_seq +

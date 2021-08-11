@@ -28,7 +28,7 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public Member loginUser(String email, String pwd) throws Exception {
-        Member member = memberRepository.findByemail(email);
+        Member member = memberRepository.findByEmail(email);
         if (member == null) throw new Exception("멤버가 조회되지 않음");
         String salt = member.getSalt().getSalt();
         pwd = saltUtil.encodePassword(salt, pwd);
