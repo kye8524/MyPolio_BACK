@@ -40,17 +40,17 @@ public class Member implements UserDetails{
     @Builder.Default
     private List<String> role = new ArrayList<>();
 
-//    @Enumerated(EnumType.STRING)
-//    private UserRole role = UserRole.ROLE_ADMIN;
 
-
-//    @JoinColumn(name = "salt")
+    //    @JoinColumn(name = "salt")
     @OneToOne(cascade = CascadeType.ALL)
     private Salt salt;
 
     @Temporal(TemporalType.TIMESTAMP)
     @CreationTimestamp
     private Date signTime;
+
+    @Column(length = 200, nullable = true)
+    private String token;
 
 
     //restart
