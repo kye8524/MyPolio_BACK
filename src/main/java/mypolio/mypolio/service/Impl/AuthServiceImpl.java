@@ -30,16 +30,7 @@ public class AuthServiceImpl implements UserDetailsService, AuthService {
         memberRepository.save(member);
     }
 
-//    @Override
-//    public Member loginUser(String email, String pwd) throws Exception {
-//        Optional<Member> member = memberRepository.findByEmail(email);
-//        if (member == null) throw new Exception("멤버가 조회되지 않음");
-//        String salt = member.getSalt().getSalt();
-//        pwd = saltUtil.encodePassword(salt, pwd);
-//        if (!member.getPwd().equals(pwd))
-//            throw new Exception("비밀번호가 틀립니다.");
-//        return member;
-//    }
+
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
