@@ -1,16 +1,27 @@
 package mypolio.mypolio.controller;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import mypolio.mypolio.config.security.JwtTokenProvider;
 import mypolio.mypolio.entity.Member;
 import mypolio.mypolio.entity.Response;
+import mypolio.mypolio.repository.MemberRepository;
 import mypolio.mypolio.service.AuthService;
+import mypolio.mypolio.service.SaltUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
+
 @RestController
-@RequestMapping("/user")
 @Slf4j
+@RequiredArgsConstructor
+@RequestMapping("/user")
 public class MemberController {
+    private final JwtTokenProvider jwtTokenProvider;
+    private final MemberRepository memberRepository;
+    private final SaltUtil saltUtil;
 
     @Autowired
     private AuthService authService;
@@ -23,5 +34,19 @@ public class MemberController {
         } catch (Exception e) {
             return new Response("error", "회원가입을 하는 도중 오류가 발생했습니다.", null);
         }
+    }
+
+
+    @RequestMapping(method = RequestMethod.POST, path = "/signin")
+    public String login(@RequestBody Map<String, String> user) {
+        Member member = memberRepository.findByEmail(user.get("email"))
+                .orElseThrow(() -> new IllegalArgumentException("가입되지 않은 E-MAIL 입니다."));
+        System.out.println(user.get("pwd"));
+        String userPwd = saltUtil.encodePassword(member.getSalt().getSalt(), user.get("pwd"));
+        String memberPwd = member.getPwd();
+        if (!userPwd.equals(memberPwd)) {
+            throw new IllegalArgumentException("잘못된 비밀번호입니다.");
+        }
+        return jwtTokenProvider.createToken(member.getEmail(), member.getRole());
     }
 }
