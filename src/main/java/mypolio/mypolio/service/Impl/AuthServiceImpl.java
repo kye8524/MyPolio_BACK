@@ -11,6 +11,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 
 @Service
 public class AuthServiceImpl implements UserDetailsService, AuthService {
@@ -34,5 +36,21 @@ public class AuthServiceImpl implements UserDetailsService, AuthService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return memberRepository.findByEmail(username)
                 .orElseThrow(() -> new UsernameNotFoundException("사용자를 찾을 수 없습니다."));
+    }
+
+    @Override
+    public boolean userUpdate(Member userDetail){
+        System.out.println(userDetail.getUserSeq());
+        Optional<Member> member = memberRepository.findByUserSeq(userDetail.getUserSeq());
+        System.out.println(member);
+        if(member.isPresent()){
+            Member user = member.get();
+            user.setName(userDetail.getName());
+            user.setUserType(userDetail.getUserType());
+            memberRepository.save(user);
+            return true;
+        }else {
+            return false;
+        }
     }
 }
