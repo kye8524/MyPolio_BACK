@@ -12,5 +12,5 @@ public interface MemberRepository extends CrudRepository<Member, Integer> {
 //    public Member findByEmail(String email);
     Optional<Member> findByEmail(String email);
 
-    Optional<Member> findByUserSeq(int userSeq);
+    Optional<Member> findBySeq(int userSeq);
 }
