@@ -59,13 +59,16 @@ public class MemberController {
         }
     }
 
-    @RequestMapping(method = RequestMethod.GET, path = "/{user_email}")
-    public Response getUser(@PathVariable String user_email){
-        System.out.println(user_email);
-        Optional<Member> user = memberRepository.findByEmail(user_email);
-        return new Response("success", "user 정보 보기", user);
+    @RequestMapping(method = RequestMethod.GET, path = "/{userSeq}")
+    public Response getUser(@PathVariable String userSeq){
+        Optional<Member> user = memberRepository.findByEmail(userSeq);
+        if(user.isPresent()){
+            return new Response("success", "user 정보 보기", user);
+        }
+        return new Response("error", "user가 없음", null);
     }
 
+<<<<<<< HEAD
     @RequestMapping(method = RequestMethod.PATCH, path = "update")
     public Response updateUser(@RequestBody Member member){
         Member user = memberRepository.findByUserSeq(member.getUserSeq());
@@ -73,5 +76,14 @@ public class MemberController {
         user = member;
         memberRepository.save(user);
         return new Response("success", "유저 정보 업데이트", user);
+=======
+    @RequestMapping(method = RequestMethod.PATCH, path = "/update")
+    public Response updateUser(@RequestBody Member userDetail){
+        if(authService.userUpdate(userDetail)){
+            return new Response("success", "유저 정보 업데이트", userDetail);
+        }else {
+            return new Response("error", "해당 유저를 찾을 수 없음", null);
+        }
+>>>>>>> a471c95cbce72c1c1f839e9e20ec8e9bbecc73bc
     }
 }

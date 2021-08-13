@@ -9,5 +9,7 @@ public interface AuthService {
 
 //    Member loginUser(String email, String pwd) throws Exception;
 
-    UserDetails loadUserByUsername(String username) throws UsernameNotFoundException;
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException;
+
+    public boolean userUpdate(Member userDetail);
 }
