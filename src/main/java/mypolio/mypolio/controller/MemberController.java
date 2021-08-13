@@ -67,16 +67,7 @@ public class MemberController {
         }
         return new Response("error", "user가 없음", null);
     }
-
-<<<<<<< HEAD
-    @RequestMapping(method = RequestMethod.PATCH, path = "update")
-    public Response updateUser(@RequestBody Member member){
-        Member user = memberRepository.findByUserSeq(member.getUserSeq());
-
-        user = member;
-        memberRepository.save(user);
-        return new Response("success", "유저 정보 업데이트", user);
-=======
+    
     @RequestMapping(method = RequestMethod.PATCH, path = "/update")
     public Response updateUser(@RequestBody Member userDetail){
         if(authService.userUpdate(userDetail)){
@@ -84,6 +75,6 @@ public class MemberController {
         }else {
             return new Response("error", "해당 유저를 찾을 수 없음", null);
         }
->>>>>>> a471c95cbce72c1c1f839e9e20ec8e9bbecc73bc
+
     }
 }
