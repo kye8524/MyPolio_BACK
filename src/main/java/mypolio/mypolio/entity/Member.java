@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 public class Member implements UserDetails{
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private int user_seq;
+    private int userSeq;
 
     @Column(length = 30, nullable = false)
     private String email;
@@ -40,11 +40,8 @@ public class Member implements UserDetails{
     @Builder.Default
     private List<String> role = new ArrayList<>();
 
-//    @Enumerated(EnumType.STRING)
-//    private UserRole role = UserRole.ROLE_ADMIN;
 
-
-//    @JoinColumn(name = "salt")
+    //    @JoinColumn(name = "salt")
     @OneToOne(cascade = CascadeType.ALL)
     private Salt salt;
 
@@ -52,6 +49,11 @@ public class Member implements UserDetails{
     @CreationTimestamp
     private Date signTime;
 
+    @Column(nullable = false)
+    private int userType;
+
+    @Column(length = 200, nullable = true)
+    private String token;
 
     //restart
     @Override
