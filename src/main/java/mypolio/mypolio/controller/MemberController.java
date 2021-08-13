@@ -72,7 +72,6 @@ public class MemberController {
 
         user = member;
         memberRepository.save(user);
-        memberRepository.
         return new Response("success", "유저 정보 업데이트", user);
     }
 }
