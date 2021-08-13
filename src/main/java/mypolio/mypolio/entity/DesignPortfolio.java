@@ -1,3 +1,4 @@
+
 package mypolio.mypolio.entity;
 
 import lombok.*;
@@ -22,30 +23,25 @@ public class DesignPortfolio {
     @Column
     private String template;
 
-    @Column
+    @Column(length = 50, nullable = false)
     private String projectName;
 
-    @Column
-    private int userSeq;
+    @ManyToOne(cascade = CascadeType.ALL)
+    private Member member;
 
-    @Column
+    @Column(length = 100, nullable = false)
     private String projectUrl;
-    @Column
+
+    @Column(length = 100, nullable = false)
     private String projectInfo;
-    @Column
+
+    @Column(length = 100, nullable = false)
     private String projectImage;
-    @Column
+
+    @Column(length = 100, nullable = false)
     private String contactEmail;
-    @Column
+    @Column(length = 20, nullable = false)
     private String contactPhone;
-    @Column
-    private String contactGit;
-    @Column
-    private String git;
-    @Column
-    private String react;
-    @Column
-    private String spring;
 
     @Temporal(TemporalType.TIMESTAMP)
     @CreationTimestamp

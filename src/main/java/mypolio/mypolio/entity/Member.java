@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 public class Member implements UserDetails{
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private int userSeq;
+    private int seq;
 
     @Column(length = 30, nullable = false)
     private String email;
