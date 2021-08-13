@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Map;
+import java.util.Optional;
 
 
 @RestController
@@ -38,7 +39,6 @@ public class MemberController {
         }
     }
 
-
     @RequestMapping(method = RequestMethod.POST, path = "/login")
     public Response login(@RequestBody Map<String, String> user, HttpServletRequest req, HttpServletResponse res) {
         try {
@@ -57,5 +57,22 @@ public class MemberController {
         } catch (Exception e) {
             return new Response("error", "로그인에 실패했습니다.", e.getMessage());
         }
+    }
+
+    @RequestMapping(method = RequestMethod.GET, path = "/{user_email}")
+    public Response getUser(@PathVariable String user_email){
+        System.out.println(user_email);
+        Optional<Member> user = memberRepository.findByEmail(user_email);
+        return new Response("success", "user 정보 보기", user);
+    }
+
+    @RequestMapping(method = RequestMethod.PATCH, path = "update")
+    public Response updateUser(@RequestBody Member member){
+        Member user = memberRepository.findByUserSeq(member.getUserSeq());
+
+        user = member;
+        memberRepository.save(user);
+        memberRepository.
+        return new Response("success", "유저 정보 업데이트", user);
     }
 }

@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 public class Member implements UserDetails{
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private int user_seq;
+    private int userSeq;
 
     @Column(length = 30, nullable = false)
     private String email;
@@ -49,9 +49,11 @@ public class Member implements UserDetails{
     @CreationTimestamp
     private Date signTime;
 
+    @Column(nullable = false)
+    private int userType;
+
     @Column(length = 200, nullable = true)
     private String token;
-
 
     //restart
     @Override

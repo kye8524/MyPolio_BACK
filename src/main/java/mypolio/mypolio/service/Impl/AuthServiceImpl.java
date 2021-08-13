@@ -30,8 +30,6 @@ public class AuthServiceImpl implements UserDetailsService, AuthService {
         memberRepository.save(member);
     }
 
-
-
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return memberRepository.findByEmail(username)
