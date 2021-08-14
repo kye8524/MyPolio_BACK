@@ -33,7 +33,7 @@ public class MemberController {
     public Response signUpUser(@RequestBody Member member) {
         try {
             authService.signUpUser(member);
-            return new Response("success", "회원가입을 성공적으로 완료했습니다.", null);
+            return new Response("success", "회원가입을 성공적으로 완료했습니다.", member);
         } catch (Exception e) {
             return new Response("error", "회원가입을 하는 도중 오류가 발생했습니다.", null);
         }

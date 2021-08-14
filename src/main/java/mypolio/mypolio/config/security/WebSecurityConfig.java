@@ -24,11 +24,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests() // 요청에 대한 사용권한 체크
 //                .antMatchers("/user/signup").permitAll()
 //                .antMatchers("/user/login").permitAll()
-                .antMatchers("/user/**").permitAll()
-                .antMatchers("/user/verify/**").permitAll()
-                .antMatchers("/oauth/**").permitAll()
-                .antMatchers("/test/user").hasRole("USER")
-                .antMatchers("/test/admin").hasRole("ADMIN")
+//                .antMatchers("/user/**").permitAll()
+//                .antMatchers("/user/verify/**").permitAll()
+//                .antMatchers("/oauth/**").permitAll()
+                .antMatchers("/**").permitAll()
+//                .antMatchers("/test/user").hasRole("USER")
+//                .antMatchers("/test/admin").hasRole("ADMIN")
                 .anyRequest().authenticated()
 //                .anyRequest().permitAll() // 그외 나머지 요청은 누구나 접근 가능
                 .and()

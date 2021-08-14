@@ -9,7 +9,6 @@ import java.util.Optional;
 
 @Repository
 public interface MemberRepository extends CrudRepository<Member, Integer> {
-//    public Member findByEmail(String email);
     Optional<Member> findByEmail(String email);
 
     Optional<Member> findBySeq(int userSeq);

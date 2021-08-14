@@ -40,9 +40,7 @@ public class AuthServiceImpl implements UserDetailsService, AuthService {
 
     @Override
     public boolean userUpdate(Member userDetail){
-        System.out.println(userDetail.getSeq());
         Optional<Member> member = memberRepository.findBySeq(userDetail.getSeq());
-        System.out.println(member);
         if(member.isPresent()){
             Member user = member.get();
             user.setName(userDetail.getName());

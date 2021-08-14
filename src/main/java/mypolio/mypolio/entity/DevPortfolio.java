@@ -46,14 +46,14 @@ public class DevPortfolio {
     @Column(length = 100, nullable = true)
     private String contactGit;
 
-    @Column(length = 100, nullable = true)
-    private String git;
+    @Column(nullable = true)
+    private int git;
 
-    @Column(length = 100, nullable = true)
-    private String react;
+    @Column(nullable = true)
+    private int react;
 
-    @Column(length = 100, nullable = true)
-    private String spring;
+    @Column(nullable = true)
+    private int spring;
 
     @Temporal(TemporalType.TIMESTAMP)
     @CreationTimestamp
