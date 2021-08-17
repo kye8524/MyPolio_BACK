@@ -12,7 +12,7 @@ import javax.persistence.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class TechStack {
+public class DevTechStack {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int seq;

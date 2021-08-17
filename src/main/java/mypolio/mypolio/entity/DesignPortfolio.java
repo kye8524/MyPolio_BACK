@@ -5,7 +5,9 @@ import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Getter
@@ -23,17 +25,24 @@ public class DesignPortfolio {
     @Column
     private String template;
 
-    @Column(length = 50, nullable = false)
-    private String projectName;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @NonNull
+    private Member member;
 
-    @Column(length = 100, nullable = false)
-    private String projectUrl;
+    @Column(nullable = true)
+    private String info;
 
-    @Column(length = 100, nullable = false)
-    private String projectInfo;
 
-    @Column(length = 100, nullable = false)
-    private String projectImage;
+    @Column(nullable = true)
+    private String education;
+
+    @OneToMany(mappedBy = "designPortfolio", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @NonNull
+    private List<DesignExperience> experience = new ArrayList<>();
+
+    @OneToMany(mappedBy = "designPortfolio", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @NonNull
+    private List<DesignTechStack> stacks = new ArrayList<>();
 
     @Column(length = 100, nullable = false)
     private String contactEmail;
@@ -41,9 +50,9 @@ public class DesignPortfolio {
     @Column(length = 20, nullable = false)
     private String contactPhone;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "designPortfolio", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     @NonNull
-    private Member member;
+    private List<ProjectImg> projectImgs = new ArrayList<>();
 
     @Temporal(TemporalType.TIMESTAMP)
     @CreationTimestamp

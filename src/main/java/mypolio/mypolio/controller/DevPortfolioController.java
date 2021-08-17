@@ -38,8 +38,8 @@ public class DevPortfolioController {
             Optional<Member> member_seq = memberRepository.findBySeq(devPortfolio.getMember().getSeq());
             Member member1 = member_seq.get();
             devPortfolio.setMember(member1);
-            List<TechStack> stacks = devPortfolio.getStacks();
-            for(TechStack stack : stacks){
+            List<DevTechStack> stacks = devPortfolio.getStacks();
+            for(DevTechStack stack : stacks){
                 stack.setDevPortfolio(devPortfolio);
             }
             devPortfolioRepository.save(devPortfolio);
@@ -54,8 +54,8 @@ public class DevPortfolioController {
         try{
             Optional<DevPortfolio> ExDevPortfolio = devPortfolioRepository.findBySeq(devPortfolio_seq);
             DevPortfolio devPortfolio = ExDevPortfolio.get();
-            List<TechStack> stacks= techStackRepository.findAllByDevPortfolio(devPortfolio);
-            for(TechStack stack : stacks){
+            List<DevTechStack> stacks= techStackRepository.findAllByDevPortfolio(devPortfolio);
+            for(DevTechStack stack : stacks){
                 stack.setDevPortfolio(new DevPortfolio());
             }
             devPortfolio.setStacks(stacks);

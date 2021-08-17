@@ -31,10 +31,11 @@ public class Member implements UserDetails{
     @Column(length = 300, nullable = false)
     private String pwd;
 
-
-
     @Column(length = 30, nullable = false)
     private String name;
+
+    @Column(length = 30, nullable = true)
+    private String image;
 
     @ElementCollection(fetch = FetchType.EAGER)
     @Builder.Default
@@ -54,6 +55,9 @@ public class Member implements UserDetails{
 
     @Column(length = 200, nullable = true)
     private String token;
+
+    @Column(length = 30, nullable = true)
+    private String birth;
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<DesignPortfolio> designPortfolios = new ArrayList<>();

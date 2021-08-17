@@ -14,7 +14,6 @@ import java.util.*;
 @NoArgsConstructor
 @Builder
 public class DevPortfolio {
-
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int seq;
@@ -22,8 +21,14 @@ public class DevPortfolio {
     @Column(length = 10, nullable = false)
     private String template;
 
-    @ManyToOne
+    @OneToOne
     private Member member;
+
+    @Column(nullable = true)
+    private String info;
+
+    @Column(nullable = true)
+    private String education;
 
     @Column(length = 100, nullable = true)
     private String contactEmail;
@@ -36,7 +41,13 @@ public class DevPortfolio {
 
     @OneToMany(mappedBy = "devPortfolio", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     @NonNull
-    private List<TechStack> stacks = new ArrayList<>();
+    private List<DevTechStack> stacks = new ArrayList<>();
+
+
+    @OneToMany(mappedBy = "devPortfolio", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @NonNull
+    private List<DevExperience> experience = new ArrayList<>();
+
 
     @OneToMany(mappedBy = "devPortfolio", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     @NonNull

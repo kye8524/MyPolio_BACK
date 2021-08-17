@@ -12,25 +12,20 @@ import javax.persistence.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class DevProject {
+public class DevExperience {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int seq;
 
+
     @Column(length = 100, nullable = false)
-    private String name;
+    private String company;
 
-    @Column(length = 100, nullable = true)
+    @Column(length = 100, nullable = false)
+    private String period;
+
+    @Column(nullable = true)
     private String info;
-
-    @Column(length = 100, nullable = true)
-    private String image;
-
-    @Column(length = 100, nullable = true)
-    private String url;
-
-    @Column(length = 100, nullable = true)
-    private String usingProgram;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @NonNull
