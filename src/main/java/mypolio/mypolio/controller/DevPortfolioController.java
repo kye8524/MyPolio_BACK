@@ -11,6 +11,7 @@ import mypolio.mypolio.repository.TechStackRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -63,6 +64,8 @@ public class DevPortfolioController {
                 project.setDevPortfolio(new DevPortfolio());
             }
             devPortfolio.setDevProjects(projects);
+//            List<DesignPortfolio> designPortfolios = new ArrayList<>();
+            devPortfolio.getMember().setDesignPortfolios( new ArrayList<>());
             return new Response("success", "포트폴리오를 불러왔습니다.", devPortfolio);
         }catch (Exception e){
             return new Response("error", "포트폴리오를 찾아올 수 없습니다", e.getMessage());

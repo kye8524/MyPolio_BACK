@@ -55,7 +55,8 @@ public class Member implements UserDetails{
     @Column(length = 200, nullable = true)
     private String token;
 
-    
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<DesignPortfolio> designPortfolios = new ArrayList<>();
 
     //restart
     @Override
@@ -87,6 +88,4 @@ public class Member implements UserDetails{
 
     @Override
     public boolean isEnabled() { return true; }
-
-
 }

@@ -26,9 +26,6 @@ public class DesignPortfolio {
     @Column(length = 50, nullable = false)
     private String projectName;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    private Member member;
-
     @Column(length = 100, nullable = false)
     private String projectUrl;
 
@@ -43,6 +40,10 @@ public class DesignPortfolio {
 
     @Column(length = 20, nullable = false)
     private String contactPhone;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @NonNull
+    private Member member;
 
     @Temporal(TemporalType.TIMESTAMP)
     @CreationTimestamp

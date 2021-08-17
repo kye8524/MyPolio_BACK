@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.Optional;
 
@@ -60,11 +61,20 @@ public class MemberController {
     }
 
     @RequestMapping(method = RequestMethod.GET, path = "/{userSeq}")
-    public Response getUser(@PathVariable String userSeq){
-        Optional<Member> user = memberRepository.findByEmail(userSeq);
+    public Response getUser(@PathVariable int userSeq){
+        Optional<Member> user = memberRepository.findBySeq(userSeq);
         if(user.isPresent()){
+            Member member = user.get();
+            if(member.getUserType() == 0){
+                member.setDesignPortfolios( new ArrayList<>());
+            }else if(member.getUserType()==1){
+                member.setDesignPortfolios(member.getDesignPortfolios());
+            }else{
+                return new Response("error", "user type 에러가 발생함", null);
+            }
             return new Response("success", "user 정보 보기", user);
         }
+
         return new Response("error", "user가 없음", null);
     }
     
