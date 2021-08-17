@@ -4,15 +4,15 @@ import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.util.*;
 
 @Entity
 @Getter
 @Setter
 @Table
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class DevPortfolio {
 
     @Id
@@ -22,20 +22,8 @@ public class DevPortfolio {
     @Column(length = 10, nullable = false)
     private String template;
 
-    @Column(length = 100, nullable = false)
-    private String projectName;
-
     @ManyToOne
     private Member member;
-
-    @Column(length = 100, nullable = false)
-    private String projectUrl;
-
-    @Column(length = 100, nullable = false)
-    private String projectInfo;
-
-    @Column(length = 100, nullable = true)
-    private String projectImage;
 
     @Column(length = 100, nullable = true)
     private String contactEmail;
@@ -46,14 +34,13 @@ public class DevPortfolio {
     @Column(length = 100, nullable = true)
     private String contactGit;
 
-    @Column(nullable = true)
-    private int git;
+    @OneToMany(mappedBy = "devPortfolio", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @NonNull
+    private List<TechStack> stacks = new ArrayList<>();
 
-    @Column(nullable = true)
-    private int react;
-
-    @Column(nullable = true)
-    private int spring;
+    @OneToMany(mappedBy = "devPortfolio", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @NonNull
+    private List<DevProject> devProjects = new ArrayList<>();
 
     @Temporal(TemporalType.TIMESTAMP)
     @CreationTimestamp

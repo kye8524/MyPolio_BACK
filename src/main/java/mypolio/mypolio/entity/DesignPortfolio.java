@@ -40,6 +40,7 @@ public class DesignPortfolio {
 
     @Column(length = 100, nullable = false)
     private String contactEmail;
+
     @Column(length = 20, nullable = false)
     private String contactPhone;
 

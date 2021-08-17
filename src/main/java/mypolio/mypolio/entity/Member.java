@@ -55,6 +55,8 @@ public class Member implements UserDetails{
     @Column(length = 200, nullable = true)
     private String token;
 
+    
+
     //restart
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
